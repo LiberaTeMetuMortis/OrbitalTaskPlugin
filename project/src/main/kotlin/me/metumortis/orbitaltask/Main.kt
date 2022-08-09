@@ -7,6 +7,7 @@ import me.metumortis.orbitaltask.commands.Bal
 import me.metumortis.orbitaltask.commands.Earn
 import me.metumortis.orbitaltask.commands.Give
 import me.metumortis.orbitaltask.commands.SetBal
+import me.metumortis.orbitaltask.functions.connect
 import org.bukkit.plugin.java.JavaPlugin
 import java.sql.Connection
 

@@ -19,7 +19,7 @@ class Give(val plugin: JavaPlugin) : CommandExecutor {
             return true
         }
         else if(!Bukkit.getOfflinePlayer(args[0]).hasPlayedBefore() && Bukkit.getPlayer(args[0]) == null){
-            sender.sendMessage(plugin.config.getString("messages.player-not-found"))
+            sender.sendMessage(plugin.config.getString("messages.player-not-found")!!.let(::translateColors))
             return true
         }
         else if(args[1].toIntOrNull() == null || args[1].toInt() < 0){
@@ -36,7 +36,7 @@ class Give(val plugin: JavaPlugin) : CommandExecutor {
                 val senderBalance = getBalanceOfThePlayer(sender)
                 val targetBalance = getBalanceOfThePlayer(target)
                 if(senderBalance < args[1].toInt()){
-                    sender.sendMessage(plugin.config.getString("messages.not-enough-money"))
+                    sender.sendMessage(plugin.config.getString("messages.not-enough-money")!!.let(::translateColors))
                     return true
                 }
                 setBalanceOfThePlayer(target, targetBalance + args[1].toInt())

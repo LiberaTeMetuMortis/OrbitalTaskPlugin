@@ -1,6 +1,7 @@
 package me.metumortis.orbitaltask.commands
 
 import me.metumortis.orbitaltask.Main
+import me.metumortis.orbitaltask.functions.translateColors
 import org.bukkit.Bukkit
 import org.bukkit.OfflinePlayer
 import org.bukkit.command.Command
@@ -12,25 +13,25 @@ class SetBal(private val plugin: JavaPlugin) : CommandExecutor {
     @Suppress("Deprecation")
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(!sender.isOp) {
-            sender.sendMessage(plugin.config.getString("messages.no-permission"))
+            sender.sendMessage(plugin.config.getString("messages.no-permission")!!.let(::translateColors))
             return true
         }
         else if(args.size != 2) {
-            sender.sendMessage(plugin.config.getString("messages.setbal-usage"))
+            sender.sendMessage(plugin.config.getString("messages.setbal-usage")!!.let(::translateColors))
             return true
         }
         else if(args[1].toIntOrNull() == null || args[1].toInt() < 0) {
-            sender.sendMessage(plugin.config.getString("messages.setbal-usage"))
+            sender.sendMessage(plugin.config.getString("messages.setbal-usage")!!.let(::translateColors))
             return true
         }
         else if(!Bukkit.getOfflinePlayer(args[0]).hasPlayedBefore() && Bukkit.getPlayer(args[0]) == null){
-            sender.sendMessage(plugin.config.getString("messages.player-not-found"))
+            sender.sendMessage(plugin.config.getString("messages.player-not-found")!!.let(::translateColors))
             return true
         }
         else {
             val player = Bukkit.getOfflinePlayer(args[0])
             setBalanceOfThePlayer(player, args[1].toInt())
-            sender.sendMessage(plugin.config.getString("messages.setbal-success")!!.replace("%player%", args[0]).replace("%balance%", args[1]))
+            sender.sendMessage(plugin.config.getString("messages.setbal-success")!!.replace("%player%", args[0]).replace("%balance%", args[1]).let(::translateColors))
             return true
         }
     }

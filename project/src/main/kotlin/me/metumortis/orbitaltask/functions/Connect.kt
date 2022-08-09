@@ -1,4 +1,4 @@
-package me.metumortis.orbitaltask
+package me.metumortis.orbitaltask.functions
 
 import java.sql.Connection
 import java.sql.DriverManager
