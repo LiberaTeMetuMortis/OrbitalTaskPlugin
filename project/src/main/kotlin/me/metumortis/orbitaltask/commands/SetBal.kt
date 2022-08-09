@@ -31,14 +31,16 @@ class SetBal(private val plugin: JavaPlugin) : CommandExecutor {
         else {
             val player = Bukkit.getOfflinePlayer(args[0])
             setBalanceOfThePlayer(player, args[1].toInt())
-            sender.sendMessage(plugin.config.getString("messages.setbal-success")!!.replace("%player%", args[0]).replace("%balance%", args[1]).let(::translateColors))
+            sender.sendMessage(plugin.config.getString("messages.setbal")!!.replace("%player%", args[0]).replace("%balance%", args[1]).let(::translateColors))
             return true
         }
     }
     companion object{
         fun setBalanceOfThePlayer(player: OfflinePlayer, amount: Int){
             val statement = Main.connection.createStatement()
-            statement.executeUpdate("UPDATE players SET balance = $amount WHERE uuid = '${player.uniqueId}'")
+            val rs = statement.executeQuery("SELECT * from balances WHERE uuid = '${player.uniqueId}'")
+            if(!rs.next()) statement.executeUpdate("INSERT INTO balances (uuid, balance) VALUES('${player.uniqueId}',$amount)")
+            else statement.executeUpdate("UPDATE balances SET balance = $amount WHERE uuid = '${player.uniqueId}'")
             statement.close()
         }
     }

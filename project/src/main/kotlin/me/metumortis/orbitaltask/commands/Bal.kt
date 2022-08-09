@@ -19,12 +19,12 @@ class Bal(private val plugin: JavaPlugin) : CommandExecutor {
                 return true
             }
             else {
-                sender.sendMessage(plugin.config.getString("messages.balance")!!.let(::translateColors).replace("%balance%", getBalanceOfThePlayer(sender).toString()))
+                sender.sendMessage(plugin.config.getString("messages.balance")!!.replace("%balance%", getBalanceOfThePlayer(sender).toString()).let(::translateColors))
                 return true
             }
         }
         else if(Bukkit.getOfflinePlayer(args[0]).hasPlayedBefore() || Bukkit.getPlayer(args[0]) != null){
-            sender.sendMessage(plugin.config.getString("messages.balance-others")!!.let(::translateColors).replace("%balance%", getBalanceOfThePlayer(Bukkit.getOfflinePlayer(args[0])).toString()))
+            sender.sendMessage(plugin.config.getString("messages.balance-others")!!.replace("%balance%", getBalanceOfThePlayer(Bukkit.getOfflinePlayer(args[0])).toString()).replace("%player%", args[0]).let(::translateColors))
             return true
         }
         else {
@@ -36,8 +36,9 @@ class Bal(private val plugin: JavaPlugin) : CommandExecutor {
         fun getBalanceOfThePlayer(player: OfflinePlayer): Int{
             val statement = connection.createStatement()
             val resultSet = statement.executeQuery("SELECT * FROM balances WHERE uuid = '${player.uniqueId}'")
+            val result = if (resultSet.next()) resultSet.getInt("balance") else 0
             statement.close()
-            return if (resultSet.next()) resultSet.getInt("balance") else 0
+            return result
         }
     }
 }

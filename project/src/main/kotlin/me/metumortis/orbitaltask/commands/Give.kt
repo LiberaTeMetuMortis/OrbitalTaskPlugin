@@ -29,8 +29,9 @@ class Give(val plugin: JavaPlugin) : CommandExecutor {
         else {
             val target = Bukkit.getOfflinePlayer(args[0])
             if(sender is ConsoleCommandSender){
-                setBalanceOfThePlayer(target, args[1].toInt())
-                sender.sendMessage(plugin.config.getString("messages.given")!!.replace("%player%", args[0]).replace("%balance%", args[1]).let(::translateColors))
+                val targetBalance = getBalanceOfThePlayer(target)
+                setBalanceOfThePlayer(target, targetBalance + args[1].toInt())
+                sender.sendMessage(plugin.config.getString("messages.given")!!.replace("%player%", args[0]).replace("%amount%", args[1]).let(::translateColors))
             }
             else if(sender is Player){
                 val senderBalance = getBalanceOfThePlayer(sender)
@@ -41,7 +42,7 @@ class Give(val plugin: JavaPlugin) : CommandExecutor {
                 }
                 setBalanceOfThePlayer(target, targetBalance + args[1].toInt())
                 setBalanceOfThePlayer(sender, senderBalance - args[1].toInt())
-                sender.sendMessage(plugin.config.getString("messages.given")!!.replace("%player%", args[0]).replace("%balance%", args[1]).let(::translateColors))
+                sender.sendMessage(plugin.config.getString("messages.given")!!.replace("%player%", args[0]).replace("%amount%", args[1]).let(::translateColors))
             }
             return true
         }

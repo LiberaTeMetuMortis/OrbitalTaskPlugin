@@ -27,8 +27,8 @@ class Main : JavaPlugin() {
         getCommand("earn")!!.setExecutor(Earn(this))
 
         // Connect to database
-        val connection = connect(this.dataFolder.absolutePath+"/data.sqlite")
-        Main.connection = connection
+        connection = connect(this.dataFolder.absolutePath+"/data.sqlite")
+
         // Create statement
         val statement = connection.createStatement()
         // Create tables if they don't exist

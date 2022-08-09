@@ -17,10 +17,10 @@ class Earn(private val plugin: JavaPlugin) : CommandExecutor {
     }
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender !is Player) {
-            sender.sendMessage(plugin.config.getString("players-only")!!.let(::translateColors))
+            sender.sendMessage(plugin.config.getString("messages.players-only")!!.let(::translateColors))
             return true
         }
-        if(!lastUseMap.containsKey(sender) || (lastUseMap[sender]!! + plugin.config.getInt("earning-cooldown",0) *60*1000) < System.currentTimeMillis()) {
+        else if(!lastUseMap.containsKey(sender) || (lastUseMap[sender]!! + plugin.config.getInt("earning-cooldown",0) *60*1000) < System.currentTimeMillis()) {
             lastUseMap[sender] = System.currentTimeMillis()
             val randomEarning = Random.nextInt(plugin.config.getInt("earning-range.min"), plugin.config.getInt("earning-range.max")+1)
             val currentBalance = getBalanceOfThePlayer(sender)

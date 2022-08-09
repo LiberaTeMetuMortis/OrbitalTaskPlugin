@@ -2,3 +2,12 @@ version: "2.0"
 name: "OrbitalTask"
 main: "me.metumortis.orbitaltask.Main"
 api-version: "1.18"
+commands:
+  bal:
+    description: "Shows balance of a player."
+  earn:
+    description: "Free money!"
+  give:
+    description: "Gives money to a player."
+  setBal:
+    description: "Sets balance of a player."

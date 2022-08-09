@@ -1,6 +1,7 @@
 messages:
   balance: "&aYour current balance is %balance%."
   balance-others: "&a%player%'s balance is %balance%."
+  not-enough-money: "&cYou don't have enough money to do that."
   player-not-found: "&cPlayer not found."
   players-only: "&cOnly players can do this."
   no-permission: "&cYou don't have permission to do this."
@@ -8,6 +9,7 @@ messages:
   earned: "&aYou earned %amount%."
   given: "&aYou gave %amount% to %player%."
   give-usage: "&cUsage: /give <player> <positiveAmount>"
+  setbal: "&aYou set %player%'s balance to %balance%."
   setbal-usage: "&cUsage: /setbal <player> <positiveAmount>"
 # In minutes
 earning-range:
