@@ -1,6 +1,5 @@
 package me.metumortis.orbitaltask.commands
 
-import me.metumortis.orbitaltask.Main.Companion.connection
 import me.metumortis.orbitaltask.commands.Bal.Companion.getBalanceOfThePlayer
 import me.metumortis.orbitaltask.commands.SetBal.Companion.setBalanceOfThePlayer
 import me.metumortis.orbitaltask.functions.translateColors
@@ -24,7 +23,6 @@ class Earn(private val plugin: JavaPlugin) : CommandExecutor {
             lastUseMap[sender] = System.currentTimeMillis()
             val randomEarning = Random.nextInt(plugin.config.getInt("earning-range.min"), plugin.config.getInt("earning-range.max")+1)
             val currentBalance = getBalanceOfThePlayer(sender)
-            val statement = connection.createStatement()
             setBalanceOfThePlayer(sender, currentBalance + randomEarning)
             sender.sendMessage(plugin.config.getString("messages.earned")!!.replace("%amount%", randomEarning.toString()).let(::translateColors))
             return true
