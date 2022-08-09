@@ -1,0 +1,16 @@
+messages:
+  balance: "&aYour current balance is %balance%."
+  balance-others: "&a%player%'s balance is %balance%."
+  player-not-found: "&cPlayer not found."
+  players-only: "&cOnly players can do this."
+  no-permission: "&cYou don't have permission to do this."
+  earning-cooldown: "&cYou can't earn money for another %seconds%."
+  earned: "&aYou earned %amount%."
+  given: "&aYou gave %amount% to %player%."
+  give-usage: "&cUsage: /give <player> <positiveAmount>"
+  setbal-usage: "&cUsage: /setbal <player> <positiveAmount>"
+# In minutes
+earning-range:
+  min: 1
+  max: 5
+earning-cooldown: 1

@@ -1,4 +1,4 @@
 version: "2.0"
-name: "deneme"
-main: "me.metumortis.kotlinspigotplugin.Main"
+name: "OrbitalTask"
+main: "me.metumortis.orbitaltask.Main"
 api-version: "1.18"
