@@ -36,5 +36,5 @@ jobs:
         run: ./gradlew moveBuilds
       - uses: actions/upload-artifact@v3
         with:
-          name: Package
+          name: OrbitalTaskPlugin
           path: build
